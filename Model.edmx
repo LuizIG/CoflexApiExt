@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GP_desarrolloModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClientsView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ClientName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GP_desarrollo2.dbo.ComponentsView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="ComponentsView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="char" MaxLength="31" Nullable="false" />
+          <Property Name="PPN_I" Type="varchar" MaxLength="31" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GP_desarrollo2.dbo.DetailComponetsView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="DetailComponetsView">
+          
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Parent" Type="varchar" MaxLength="31" />
+          <Property Name="SkuArticulo" Type="varchar" MaxLength="31" />
+          <Property Name="SkuComponente" Type="varchar" MaxLength="31" />
+          <Property Name="ITEMDESC" Type="varchar" MaxLength="101" />
+          <Property Name="QUANTITY_I" Type="numeric" Precision="19" Scale="5" />
+          <Property Name="UOFM" Type="varchar" MaxLength="9" />
+          <Property Name="STNDCOST" Type="numeric" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="CURRCOST" Type="numeric" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="RESULT" Type="numeric" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="Nivel1" Type="smallint" />
+          <Property Name="Nivel2" Type="int" Nullable="false" />
+          <Property Name="Nivel3" Type="int" Nullable="false" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="RACost" Type="int" />
+          <Property Name="FinalCost" Type="float" />
+          <Property Name="RBCost" Type="int" />
+          <Property Name="Shipping" Type="float" />
+          <Property Name="AltDescription" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+      
+        <EntityType Name="ExchangeRateView">
+          <Key>
+            <PropertyRef Name="MXN_to_DLLS" />
+          </Key>
+          <Property Name="MXN_to_DLLS" Type="varchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GP_desarrollo2.dbo.ItemComponentsView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="ItemComponentsView">
+          
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SkuArticulo" Type="varchar" MaxLength="31" />
+          <Property Name="SkuComponente" Type="varchar" MaxLength="31" />
+          <Property Name="ITEMDESC" Type="varchar" MaxLength="101" />
+          <Property Name="QUANTITY_I" Type="numeric" Precision="19" Scale="5" />
+          <Property Name="UOFM" Type="varchar" MaxLength="9" />
+          <Property Name="STNDCOST" Type="numeric" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="CURRCOST" Type="numeric" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="RESULT" Type="numeric" Precision="38" Scale="9" />
+          <Property Name="Nivel1" Type="smallint" />
+          <Property Name="Nivel2" Type="int" />
+          <Property Name="Nivel3" Type="int" />
+          <Property Name="Parent" Type="varchar" MaxLength="31" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="RACost" Type="int" />
+          <Property Name="FinalCost" Type="float" />
+          <Property Name="RBCost" Type="int" />
+          <Property Name="Shipping" Type="float" />
+          <Property Name="AltDescription" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GP_desarrollo2.dbo.ItemsGroupView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="ItemsGroupView">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="31" Nullable="false" />
+          <Property Name="PPN_I" Type="varchar" MaxLength="31" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'GP_desarrollo2.dbo.ItemsView' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="ItemsView">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CUSTNMBR" />
+          </Key>
+          <Property Name="ID" Type="char" MaxLength="31" Nullable="false" />
+          <Property Name="PPN_I" Type="varchar" MaxLength="31" />
+          <Property Name="CUSTNMBR" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="GP_desarrolloModelStoreContainer">
+          <EntitySet Name="ComponentsView" EntityType="Self.ComponentsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ComponentsView].[Id] AS [Id], 
+    [ComponentsView].[PPN_I] AS [PPN_I]
+    FROM [dbo].[ComponentsView] AS [ComponentsView]</DefiningQuery>
+          </EntitySet>
+
+          <EntitySet Name="ItemsGroupView" EntityType="Self.ItemsGroupView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [ItemsGroupView].[ID] AS [ID],
+              [ItemsGroupView].[PPN_I] AS [PPN_I]
+              FROM [dbo].[ItemsGroupView] AS [ItemsGroupView]
+            </DefiningQuery>
+          </EntitySet>
+
+          <EntitySet Name="ClientsView" EntityType="Self.ClientsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [ClientsView].[Id] AS [Id],
+              [ClientsView].[ClientName] AS [ClientName]
+              FROM [dbo].[ClientsView] AS [ClientsView]
+            </DefiningQuery>
+          </EntitySet>
+
+          <EntitySet Name="ExchangeRateView" EntityType="Self.ExchangeRateView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>
+              SELECT
+              [ExchangeRateView].[MXN_to_DLLS] AS [MXN_to_DLLS]
+              FROM [dbo].[ExchangeRateView] AS [ExchangeRateView]
+            </DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DetailComponetsView" EntityType="Self.DetailComponetsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DetailComponetsView].[Parent] AS [Parent], 
+    [DetailComponetsView].[SkuArticulo] AS [SkuArticulo], 
+    [DetailComponetsView].[SkuComponente] AS [SkuComponente], 
+    [DetailComponetsView].[ITEMDESC] AS [ITEMDESC], 
+    [DetailComponetsView].[QUANTITY_I] AS [QUANTITY_I], 
+    [DetailComponetsView].[UOFM] AS [UOFM], 
+    [DetailComponetsView].[STNDCOST] AS [STNDCOST], 
+    [DetailComponetsView].[CURRCOST] AS [CURRCOST], 
+    [DetailComponetsView].[RESULT] AS [RESULT], 
+    [DetailComponetsView].[Nivel1] AS [Nivel1], 
+    [DetailComponetsView].[Nivel2] AS [Nivel2], 
+    [DetailComponetsView].[Nivel3] AS [Nivel3], 
+    [DetailComponetsView].[Id] AS [Id], 
+    [DetailComponetsView].[RACost] AS [RACost], 
+    [DetailComponetsView].[FinalCost] AS [FinalCost], 
+    [DetailComponetsView].[RBCost] AS [RBCost], 
+    [DetailComponetsView].[Shipping] AS [Shipping], 
+    [DetailComponetsView].[AltDescription] AS [AltDescription]
+    FROM [dbo].[DetailComponetsView] AS [DetailComponetsView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ItemComponentsView" EntityType="Self.ItemComponentsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ItemComponentsView].[SkuArticulo] AS [SkuArticulo], 
+    [ItemComponentsView].[SkuComponente] AS [SkuComponente], 
+    [ItemComponentsView].[ITEMDESC] AS [ITEMDESC], 
+    [ItemComponentsView].[QUANTITY_I] AS [QUANTITY_I], 
+    [ItemComponentsView].[UOFM] AS [UOFM], 
+    [ItemComponentsView].[STNDCOST] AS [STNDCOST], 
+    [ItemComponentsView].[CURRCOST] AS [CURRCOST], 
+    [ItemComponentsView].[RESULT] AS [RESULT], 
+    [ItemComponentsView].[Nivel1] AS [Nivel1], 
+    [ItemComponentsView].[Nivel2] AS [Nivel2], 
+    [ItemComponentsView].[Nivel3] AS [Nivel3], 
+    [ItemComponentsView].[Parent] AS [Parent], 
+    [ItemComponentsView].[Id] AS [Id], 
+    [ItemComponentsView].[RACost] AS [RACost], 
+    [ItemComponentsView].[FinalCost] AS [FinalCost], 
+    [ItemComponentsView].[RBCost] AS [RBCost], 
+    [ItemComponentsView].[Shipping] AS [Shipping], 
+    [ItemComponentsView].[AltDescription] AS [AltDescription]
+    FROM [dbo].[ItemComponentsView] AS [ItemComponentsView]</DefiningQuery>
+          </EntitySet>
+  
+          <EntitySet Name="ItemsView" EntityType="Self.ItemsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ItemsView].[ID] AS [ID], 
+    [ItemsView].[PPN_I] AS [PPN_I], 
+    [ItemsView].[CUSTNMBR] AS [CUSTNMBR]
+    FROM [dbo].[ItemsView] AS [ItemsView]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GP_desarrolloModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClientsView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+
+
+        <EntityType Name="ExchangeRateView">
+          <Key>
+            <PropertyRef Name="MXN_to_DLLS" />
+          </Key>
+          <Property Name="MXN_to_DLLS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+
+        <EntityType Name="ComponentsView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="31" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PPN_I" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DetailComponetsView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Parent" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="SkuArticulo" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="SkuComponente" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="ITEMDESC" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTITY_I" Type="Decimal" Precision="19" Scale="5" />
+          <Property Name="UOFM" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="STNDCOST" Type="Decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="CURRCOST" Type="Decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="RESULT" Type="Decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="Nivel1" Type="Int16" />
+          <Property Name="Nivel2" Type="Int32" Nullable="false" />
+          <Property Name="Nivel3" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="RBCost" Type="Int32" />
+          <Property Name="FinalCost" Type="Double" />
+          <Property Name="RACost" Type="Int32" />
+          <Property Name="Shipping" Type="Double" />
+          <Property Name="AltDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ItemComponentsView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SkuArticulo" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="SkuComponente" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="ITEMDESC" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTITY_I" Type="Decimal" Precision="19" Scale="5" />
+          <Property Name="UOFM" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="STNDCOST" Type="Decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="CURRCOST" Type="Decimal" Precision="19" Scale="5" Nullable="false" />
+          <Property Name="RESULT" Type="Decimal" Precision="38" Scale="9" />
+          <Property Name="Nivel1" Type="Int16" />
+          <Property Name="Nivel2" Type="Int32" />
+          <Property Name="Nivel3" Type="Int32" />
+          <Property Name="Parent" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="RBCost" Type="Int32" />
+          <Property Name="FinalCost" Type="Double" />
+          <Property Name="RACost" Type="Int32" />
+          <Property Name="Shipping" Type="Double" />
+          <Property Name="AltDescription" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ItemsView">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Custnmbr" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="31" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PPN_I" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="Custnmbr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="GP_desarrolloEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClientsView" EntityType="Self.ClientsView" />
+          <EntitySet Name="ExchangeRateView" EntityType="Self.ExchangeRateView" />
+          <EntitySet Name="ComponentsView" EntityType="Self.ComponentsView" />
+          <EntitySet Name="DetailComponetsView" EntityType="Self.DetailComponetsView" />
+          <EntitySet Name="ItemComponentsView" EntityType="Self.ItemComponentsView" />
+          <EntitySet Name="ItemsView" EntityType="Self.ItemsView" />
+          <EntitySet Name="ItemsGroupView" EntityType="Self.ItemsGroupView" />
+        </EntityContainer>
+        <EntityType Name="ItemsGroupView">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="31" FixedLength="true" Unicode="false" />
+          <Property Name="PPN_I" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GP_desarrolloModelStoreContainer" CdmEntityContainer="GP_desarrolloEntities">
+          <EntitySetMapping Name="ComponentsView">
+            <EntityTypeMapping TypeName="GP_desarrolloModel.ComponentsView">
+              <MappingFragment StoreEntitySet="ComponentsView">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PPN_I" ColumnName="PPN_I" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+
+          <EntitySetMapping Name="DetailComponetsView">
+            <EntityTypeMapping TypeName="GP_desarrolloModel.DetailComponetsView">
+              <MappingFragment StoreEntitySet="DetailComponetsView">
+                <ScalarProperty Name="AltDescription" ColumnName="AltDescription" />
+                <ScalarProperty Name="Shipping" ColumnName="Shipping" />
+                <ScalarProperty Name="RACost" ColumnName="RACost" />
+                <ScalarProperty Name="FinalCost" ColumnName="FinalCost" />
+                <ScalarProperty Name="RBCost" ColumnName="RBCost" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="SkuArticulo" ColumnName="SkuArticulo" />
+                <ScalarProperty Name="SkuComponente" ColumnName="SkuComponente" />
+                <ScalarProperty Name="ITEMDESC" ColumnName="ITEMDESC" />
+                <ScalarProperty Name="QUANTITY_I" ColumnName="QUANTITY_I" />
+                <ScalarProperty Name="UOFM" ColumnName="UOFM" />
+                <ScalarProperty Name="STNDCOST" ColumnName="STNDCOST" />
+                <ScalarProperty Name="CURRCOST" ColumnName="CURRCOST" />
+                <ScalarProperty Name="RESULT" ColumnName="RESULT" />
+                <ScalarProperty Name="Nivel1" ColumnName="Nivel1" />
+                <ScalarProperty Name="Nivel2" ColumnName="Nivel2" />
+                <ScalarProperty Name="Nivel3" ColumnName="Nivel3" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemComponentsView">
+            <EntityTypeMapping TypeName="GP_desarrolloModel.ItemComponentsView">
+              <MappingFragment StoreEntitySet="ItemComponentsView">
+                <ScalarProperty Name="AltDescription" ColumnName="AltDescription" />
+                <ScalarProperty Name="Shipping" ColumnName="Shipping" />
+                <ScalarProperty Name="RACost" ColumnName="RACost" />
+                <ScalarProperty Name="FinalCost" ColumnName="FinalCost" />
+                <ScalarProperty Name="RBCost" ColumnName="RBCost" />
+                <ScalarProperty Name="SkuArticulo" ColumnName="SkuArticulo" />
+                <ScalarProperty Name="SkuComponente" ColumnName="SkuComponente" />
+                <ScalarProperty Name="ITEMDESC" ColumnName="ITEMDESC" />
+                <ScalarProperty Name="QUANTITY_I" ColumnName="QUANTITY_I" />
+                <ScalarProperty Name="UOFM" ColumnName="UOFM" />
+                <ScalarProperty Name="STNDCOST" ColumnName="STNDCOST" />
+                <ScalarProperty Name="CURRCOST" ColumnName="CURRCOST" />
+                <ScalarProperty Name="RESULT" ColumnName="RESULT" />
+                <ScalarProperty Name="Nivel1" ColumnName="Nivel1" />
+                <ScalarProperty Name="Nivel2" ColumnName="Nivel2" />
+                <ScalarProperty Name="Nivel3" ColumnName="Nivel3" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemsView">
+            <EntityTypeMapping TypeName="GP_desarrolloModel.ItemsView">
+              <MappingFragment StoreEntitySet="ItemsView">
+                <ScalarProperty Name="Custnmbr" ColumnName="CUSTNMBR" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PPN_I" ColumnName="PPN_I" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemsGroupView">
+            <EntityTypeMapping TypeName="GP_desarrolloModel.ItemsGroupView">
+              <MappingFragment StoreEntitySet="ItemsGroupView">
+                <ScalarProperty Name="PPN_I" ColumnName="PPN_I" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+
+          <EntitySetMapping Name="ClientsView">
+            <EntityTypeMapping TypeName="GP_desarrolloModel.ClientsView">
+              <MappingFragment StoreEntitySet="ClientsView">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+
+          <EntitySetMapping Name="ExchangeRateView">
+            <EntityTypeMapping TypeName="GP_desarrolloModel.ExchangeRateView">
+              <MappingFragment StoreEntitySet="ExchangeRateView">
+                <ScalarProperty Name="MXN_to_DLLS" ColumnName="MXN_to_DLLS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
